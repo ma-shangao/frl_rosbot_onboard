@@ -1,0 +1,40 @@
+<launch>
+
+    <arg name="robot" default="rosbot" />
+
+    <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen"/>
+
+    <node pkg="rviz" type="rviz" name="rviz"/>
+
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping">
+        <param name="base_frame" value="base_link"/>
+        <param name="odom_frame" value="odom" />
+        <param name="delta" value="0.1" />
+    </node>
+
+<!--    move_base nodes for different robots-->
+
+<!--    <node if="$(eval arg('robot') == 'rosbot')" pkg="move_base" type="move_base" name="move_base" output="screen">-->
+<!--        <param name="controller_frequency" value="10.0"/>-->
+<!--        <rosparam file="$(find multi-ugv_client)/config/rosbot_move_base/costmap_common_params.yaml"-->
+<!--                  command="load" ns="global_costmap" />-->
+<!--        <rosparam file="$(find multi-ugv_client)/config/rosbot_move_base/costmap_common_params.yaml"-->
+<!--                  command="load" ns="local_costmap" />-->
+<!--        <rosparam file="$(find multi-ugv_client)/config/rosbot_move_base/local_costmap_params.yaml"-->
+<!--                  command="load" />-->
+<!--        <rosparam file="$(find multi-ugv_client)/config/rosbot_move_base/global_costmap_params.yaml"-->
+<!--                  command="load" />-->
+<!--        <rosparam file="$(find multi-ugv_client)/config/rosbot_move_base/trajectory_planner.yaml"-->
+<!--                  command="load" />-->
+<!--    </node>-->
+
+<!--    <node if="$(eval arg('robot') == 'scoutmini')" pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">-->
+<!--        <rosparam file="$(find scout_description)/param/4wd/costmap_common_params.yaml" command="load" ns="global_costmap" />-->
+<!--        <rosparam file="$(find scout_description)/param/4wd/costmap_common_params.yaml" command="load" ns="local_costmap" />-->
+<!--        <rosparam file="$(find scout_description)/param/4wd/local_costmap_params.yaml" command="load" />-->
+<!--        <rosparam file="$(find scout_description)/param/4wd/global_costmap_params.yaml" command="load" />-->
+<!--        <rosparam file="$(find scout_description)/param/4wd/base_local_planner_params.yaml" command="load" />-->
+<!--        <rosparam file="$(find scout_description)/param/4wd/move_base_params.yaml" command="load" />-->
+<!--    </node>-->
+
+</launch>
