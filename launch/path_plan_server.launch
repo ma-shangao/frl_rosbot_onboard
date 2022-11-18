@@ -1,5 +1,6 @@
 <launch>
 
+    <param name="tf_prefix" value="$(env ROS_NAMESPACE)" />
     <arg name="robot" default="rosbot" />
     <arg name="headless" default="true" />
 
