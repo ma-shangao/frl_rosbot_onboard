@@ -3,11 +3,11 @@
 
     <param name="tf_prefix" value="$(env ROS_NAMESPACE)" />
 
-    <group if="$(eval $(arg robot)=='scoutmini')">
+    <group if="$(eval arg('robot') == 'scoutmini')">
         <include file="$(find scout_bringup)/launch/scout_minimal.launch"/>
         <include file="$(find scout_bringup)/launch/open_rslidar.launch"/>
     </group>
-    <group if="$(eval $(arg robot)=='rosbot')">
+    <group if="$(eval arg('robot') == 'rosbot')">
         <arg name="rosbot_pro" default="true" />
         <include file="$(find rosbot_ekf)/launch/all.launch" pass_all_args="true"/>
         <include file="$(find rplidar_ros)/launch/rplidar_a3.launch"/>
