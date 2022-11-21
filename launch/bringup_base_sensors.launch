@@ -2,12 +2,13 @@
     <arg name="robot" default="rosbot" />
 
     <param name="tf_prefix" value="$(env ROS_NAMESPACE)" />
+    <param name="frame_prefix" value="$(env ROS_NAMESPACE)" />
 
     <group if="$(eval arg('robot') == 'scoutmini')">
         <include file="$(find scout_bringup)/launch/scout_minimal.launch"/>
         <include file="$(find scout_bringup)/launch/open_rslidar.launch"/>
-        <node pkg="tf" type="static_transform_publisher" name="imu_publisher"
-              args="0 0 0.02 0 0 0 base_link odom 100" />
+<!--        <node pkg="tf" type="static_transform_publisher" name="imu_publisher"-->
+<!--              args="0 0 0.02 0 0 0 base_link imu_publisher 100" />-->
     </group>
     <group if="$(eval arg('robot') == 'rosbot')">
         <arg name="rosbot_pro" default="true" />
