@@ -1,0 +1,28 @@
+<launch>
+    <arg name="robot" default="rosbot" />
+
+    <param name="tf_prefix" value="$(env ROS_NAMESPACE)" />
+
+    <group if="$(eval $(arg robot)=='scoutmini')">
+        <include file="$(find scout_bringup)/launch/scout_minimal.launch"/>
+        <include file="$(find scout_bringup)/launch/open_rslidar.launch"/>
+    </group>
+    <group if="$(eval $(arg robot)=='rosbot')">
+        <arg name="rosbot_pro" default="true" />
+        <include file="$(find rosbot_ekf)/launch/all.launch" pass_all_args="true"/>
+        <include file="$(find rplidar_ros)/launch/rplidar_a3.launch"/>
+        <include file="$(find astra_camera)/launch/astra.launch"/>
+        <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster"
+              args="0.02 0 0.0915 3.14 0 0 base_link laser 100"/>
+        <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster"
+              args="-0.0062 0 0.159 0 0 0 base_link camera_link 100"/>
+        <node pkg="tf" type="static_transform_publisher" name="range_broadcaster_fl"
+              args="0.0985 0.068 0 0 0 0 base_link range_fl 100"/>
+        <node pkg="tf" type="static_transform_publisher" name="range_broadcaster_fr"
+              args="0.0985 -0.068 0 0 0 0 base_link range_fr 100"/>
+        <node pkg="tf" type="static_transform_publisher" name="range_broadcaster_rl"
+              args="-0.0985 0.068 0 0 0 0 base_link range_rl 100"/>
+        <node pkg="tf" type="static_transform_publisher" name="range_broadcaster_rr"
+              args="-0.0985 -0.068 0 0 0 0 base_link range_rr 100"/>
+    </group>
+</launch>
