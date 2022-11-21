@@ -2,7 +2,7 @@
     <arg name="robot" default="rosbot" />
 
     <param name="tf_prefix" value="$(env ROS_NAMESPACE)" />
-    <param name="frame_prefix" value="$(env ROS_NAMESPACE)" />
+<!--    <param name="frame_prefix" value="$(env ROS_NAMESPACE)" />-->
 
     <group if="$(eval arg('robot') == 'scoutmini')">
         <include file="$(find scout_bringup)/launch/scout_minimal.launch"/>
@@ -12,9 +12,15 @@
     </group>
     <group if="$(eval arg('robot') == 'rosbot')">
         <arg name="rosbot_pro" default="true" />
+
+        <param name="robot_description"
+               command="cat $(find rosbot_description)/urdf/rosbot.xacro"/>
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
         <include file="$(find rosbot_ekf)/launch/all.launch" pass_all_args="true"/>
         <include file="$(find rplidar_ros)/launch/rplidar_a3.launch"/>
         <include file="$(find astra_camera)/launch/astra.launch"/>
+
         <node pkg="tf" type="static_transform_publisher" name="laser_broadcaster"
               args="0.02 0 0.0915 3.14 0 0 base_link laser 100"/>
         <node pkg="tf" type="static_transform_publisher" name="camera_broadcaster"
