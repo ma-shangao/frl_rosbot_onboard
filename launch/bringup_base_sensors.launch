@@ -6,7 +6,9 @@
 
     <group if="$(eval arg('robot') == 'scoutmini')">
         <include file="$(find scout_bringup)/launch/scout_minimal.launch"/>
+<!--            included the scout_description-->
         <include file="$(find scout_bringup)/launch/open_rslidar.launch"/>
+        <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
 <!--        <node pkg="tf" type="static_transform_publisher" name="imu_publisher"-->
 <!--              args="0 0 0.02 0 0 0 base_link imu_publisher 100" />-->
     </group>
