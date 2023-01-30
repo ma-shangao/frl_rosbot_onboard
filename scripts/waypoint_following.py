@@ -13,7 +13,7 @@ from geometry_msgs.msg import PoseStamped
 
 from frl_rosbot_onboard.basic_navigator import BasicNavigator
 
-def main(argv=sys.argv[1:]):
+def single_pose_nav(x, y, argv=sys.argv[1:]):
     rclpy.init()
     navigator = BasicNavigator()
 
@@ -32,8 +32,8 @@ def main(argv=sys.argv[1:]):
     goal_pose = PoseStamped()
     goal_pose.header.frame_id = 'map'
     goal_pose.header.stamp = navigator.get_clock().now().to_msg()
-    goal_pose.pose.position.x = 4.6
-    goal_pose.pose.position.y = -3.5
+    goal_pose.pose.position.x = x
+    goal_pose.pose.position.y = y
     goal_pose.pose.orientation.w = 1.0
     navigator.goToPose(goal_pose)
 
@@ -67,6 +67,16 @@ def main(argv=sys.argv[1:]):
         print('Goal failed!')
     else:
         print('Goal has an invalid return status!')
+
+    rclpy.shutdown()
+    # exit(0)
+
+def main():
+    poses_x = [5.4, 4.8, 3.7, 2.9, 0.0]
+    poses_y = [0.0, -0.1, -0.0, -0.1, -0.0]
+
+    for i in range(len(poses_x)):
+       single_pose_nav(poses_x[i], poses_y[i])
 
     exit(0)
 
