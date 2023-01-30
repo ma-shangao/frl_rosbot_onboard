@@ -23,7 +23,8 @@ from action_msgs.msg import GoalStatus
 from geometry_msgs.msg import Pose
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from lifecycle_msgs.srv import GetState
-from nav2_msgs.action import NavigateThroughPoses, NavigateToPose
+# from nav2_msgs.action import NavigateThroughPoses
+from nav2_msgs.action import NavigateToPose
 
 import rclpy
 
@@ -49,9 +50,9 @@ class BasicNavigator(Node):
           depth=1)
 
         self.initial_pose_received = False
-        self.nav_through_poses_client = ActionClient(self,
-                                                     NavigateThroughPoses,
-                                                     'navigate_through_poses')
+        # self.nav_through_poses_client = ActionClient(self,
+        #                                              NavigateThroughPoses,
+        #                                              'navigate_through_poses')
         self.nav_to_pose_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
         self.model_pose_sub = self.create_subscription(PoseWithCovarianceStamped,
                                                        'amcl_pose',
@@ -66,27 +67,27 @@ class BasicNavigator(Node):
         self.initial_pose = initial_pose
         self._setInitialPose()
 
-    def goThroughPoses(self, poses):
-        # Sends a `NavToPose` action request and waits for completion
-        self.debug("Waiting for 'NavigateToPose' action server")
-        while not self.nav_through_poses_client.wait_for_server(timeout_sec=1.0):
-            self.info("'NavigateToPose' action server not available, waiting...")
+    # def goThroughPoses(self, poses):
+    #     # Sends a `NavToPose` action request and waits for completion
+    #     self.debug("Waiting for 'NavigateToPose' action server")
+    #     while not self.nav_through_poses_client.wait_for_server(timeout_sec=1.0):
+    #         self.info("'NavigateToPose' action server not available, waiting...")
 
-        goal_msg = NavigateThroughPoses.Goal()
-        goal_msg.poses = poses
+    #     goal_msg = NavigateThroughPoses.Goal()
+    #     goal_msg.poses = poses
 
-        self.info('Navigating with ' + str(len(poses)) + ' goals.' + '...')
-        send_goal_future = self.nav_through_poses_client.send_goal_async(goal_msg,
-                                                                         self._feedbackCallback)
-        rclpy.spin_until_future_complete(self, send_goal_future)
-        self.goal_handle = send_goal_future.result()
+    #     self.info('Navigating with ' + str(len(poses)) + ' goals.' + '...')
+    #     send_goal_future = self.nav_through_poses_client.send_goal_async(goal_msg,
+    #                                                                      self._feedbackCallback)
+    #     rclpy.spin_until_future_complete(self, send_goal_future)
+    #     self.goal_handle = send_goal_future.result()
 
-        if not self.goal_handle.accepted:
-            self.error('Goal with ' + str(len(poses)) + ' poses was rejected!')
-            return False
+    #     if not self.goal_handle.accepted:
+    #         self.error('Goal with ' + str(len(poses)) + ' poses was rejected!')
+    #         return False
 
-        self.result_future = self.goal_handle.get_result_async()
-        return True
+    #     self.result_future = self.goal_handle.get_result_async()
+    #     return True
 
     def goToPose(self, pose):
         # Sends a `NavToPose` action request and waits for completion

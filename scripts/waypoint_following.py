@@ -5,20 +5,25 @@
 import sys
 
 import rclpy
+from rclpy.duration import Duration
 
-from multi-ugv_client.basic_navigator import BasicNavigator
+from action_msgs.msg import GoalStatus
+from geometry_msgs.msg import Pose
+from geometry_msgs.msg import PoseStamped
+
+from frl_rosbot_onboard.basic_navigator import BasicNavigator
 
 def main(argv=sys.argv[1:]):
     rclpy.init()
     navigator = BasicNavigator()
 
     # Set our demo's initial pose
-    initial_pose = Pose()
-    initial_pose.position.x = 3.45
-    initial_pose.position.y = 2.15
-    initial_pose.orientation.z = 1.0
-    initial_pose.orientation.w = 0.0
-    navigator.setInitialPose(initial_pose)
+    # initial_pose = Pose()
+    # initial_pose.position.x = 3.45
+    # initial_pose.position.y = 2.15
+    # initial_pose.orientation.z = 1.0
+    # initial_pose.orientation.w = 0.0
+    # navigator.setInitialPose(initial_pose)
 
     # Wait for navigation to fully activate
     navigator.waitUntilNav2Active()
@@ -27,8 +32,8 @@ def main(argv=sys.argv[1:]):
     goal_pose = PoseStamped()
     goal_pose.header.frame_id = 'map'
     goal_pose.header.stamp = navigator.get_clock().now().to_msg()
-    goal_pose.pose.position.x = -2.0
-    goal_pose.pose.position.y = -0.5
+    goal_pose.pose.position.x = 4.6
+    goal_pose.pose.position.y = -3.5
     goal_pose.pose.orientation.w = 1.0
     navigator.goToPose(goal_pose)
 
@@ -43,14 +48,14 @@ def main(argv=sys.argv[1:]):
         # Do something with the feedback
         i = i + 1
         feedback = navigator.getFeedback()
-        if feedback and i % 5 == 0:
-            print('Estimated time of arrival: ' + '{0:.0f}'.format(
-                  Duration.from_msg(feedback.estimated_time_remaining).nanoseconds / 1e9)
-                  + ' seconds.')
+        # if feedback and i % 5 == 0:
+            # print('Estimated time of arrival: ' + '{0:.0f}'.format(
+            #       Duration.from_msg(feedback.estimated_time_remaining).nanoseconds / 1e9)
+            #       + ' seconds.')
 
-            # Some navigation timeout to demo cancellation
-            if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
-                navigator.cancelNav()
+            # # Some navigation timeout to demo cancellation
+            # if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
+            #     navigator.cancelNav()
 
     # Do something depending on the return code
     result = navigator.getResult()

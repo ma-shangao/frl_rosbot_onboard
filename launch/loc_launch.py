@@ -21,7 +21,7 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([nav2_bringup, '/launch/localization_launch.py']),
             launch_arguments={
-                'params_file': './src/multi-ugv_client/config/amcl.yaml',
+                'params_file': './src/frl_rosbot_onboard/config/amcl.yaml',
                 'map': './map/mpeb417_map.yaml'
             }.items()  
         ),
