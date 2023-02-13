@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-          linter: [copyright, flake8, mypy, pep257, pep8, xmllint]
+          linter: [copyright, flake8, mypy, pep257, cpplint, xmllint]
     steps:
     - uses: actions/checkout@v2
     - uses: ros-tooling/setup-ros@master
