@@ -13,6 +13,6 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file docker_ci/Dockerfile --tag frl_rosbot_onboard:$(date +%s)
+      run: docker build . --file Dockerfile --tag frl_rosbot_onboard:$(date +%s)

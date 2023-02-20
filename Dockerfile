@@ -18,12 +18,14 @@ RUN apt-get install -y python3-pip
 WORKDIR /work/ros2_ws/src
 
 # RUN git clone https://github.com/ma-shangao/frl_rosbot_onboard.git
-COPY frl_rosbot_onboard/ frl_rosbot_onboard/
+COPY ./ frl_rosbot_onboard/
 
 RUN git clone https://github.com/husarion/rosbot_description.git
 
-WORKDIR /work/ros2_ws/src/rosbot_description
+WORKDIR /work/ros2_ws/src/frl_rosbot_onboard
+RUN ls
 
+WORKDIR /work/ros2_ws/src/rosbot_description
 RUN git checkout foxy
 
 WORKDIR /work/ros2_ws
