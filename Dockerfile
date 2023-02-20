@@ -22,8 +22,8 @@ COPY ./* frl_rosbot_onboard/
 
 RUN git clone https://github.com/husarion/rosbot_description.git
 
-# WORKDIR /work/ros2_ws/src/frl_rosbot_onboard
-# RUN git checkout foxy
+WORKDIR /work/ros2_ws/src/frl_rosbot_onboard
+RUN ls
 
 WORKDIR /work/ros2_ws/src/rosbot_description
 RUN git checkout foxy
