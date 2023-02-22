@@ -25,6 +25,12 @@ def generate_launch_description():
         ]
     )
 
+    astra_camera = launch_ros.actions.Node(
+        package='astra_camera',
+            executable='astra_camera_node',
+            output='screen'
+    )
+
     rosbot_tf = launch_ros.actions.Node(
         package='rosbot_description',
         executable='rosbot_tf',
@@ -35,25 +41,21 @@ def generate_launch_description():
         launch.launch_description_sources.PythonLaunchDescriptionSource(
             os.path.join(rplidar_ros, 'launch', 'rplidar_a3.launch.py'))
     )
-    return LaunchDescription([
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([frl_rosbot_onboard, '/launch/robot_state_publisher_launch.py']),
-        ),
-        
-        Node(
-            package='astra_camera',
-            executable='astra_camera_node',
-            output='screen'
-        ),
 
+    rosbot_state = launch.actions.IncludeLaunchDescription(
+        launch.launch_description_sources.PythonLaunchDescriptionSource(
+            [frl_rosbot_onboard, '/launch/robot_state_publisher_launch.py'])
+    )
+    return LaunchDescription([
         DeclareLaunchArgument(
             name='use_sim_time',
             default_value='false'
         ),
         DeclareLaunchArgument('verbose', default_value='true',
                               description='Set "true" to increase messages written to terminal.'),
+        astra_camera,
+        rosbot_state,
         rp_lidar,
-
         rosserial,
         rosbot_tf,
 
