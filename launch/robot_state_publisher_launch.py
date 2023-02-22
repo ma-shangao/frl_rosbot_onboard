@@ -8,8 +8,8 @@ import xacro
 def generate_launch_description():
 
     # Specify the name of the package and path to xacro file within the package
-    pkg_name = 'rosbot_description'
-    file_subpath = 'urdf/rosbot.xacro'
+    pkg_name = 'frl_rosbot_onboard'#rosbot_description
+    file_subpath = 'config/urdf/rosbot.xacro'
 
 
     # Use xacro to process the file

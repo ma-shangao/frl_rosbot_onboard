@@ -16,36 +16,6 @@ def generate_launch_description():
     rplidar_ros = get_package_share_directory('rplidar_ros')
     frl_rosbot_onboard = get_package_share_directory('frl_rosbot_onboard')
 
-    camera_depth_tf = launch_ros.actions.Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        output='log',
-        arguments=['0', '0', '0', '-1.5707', '0', '-1.5707', 'camera_link', 'camera_depth_frame'],
-        parameters=[
-    		rosbot_description + '/config/static_tf.yaml'
-    	],
-    )
-    
-    camera_link_tf = launch_ros.actions.Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        output='log',
-        arguments=['-0.03', '0', '0.11', '0', '0', '0', 'base_link', 'camera_link'],
-        parameters=[
-    		rosbot_description + '/config/static_tf.yaml'
-        ]
-    )
-
-    laser_frame_tf = launch_ros.actions.Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        output='log',
-        arguments=['0.0', '0.0', '0.08', '-3.141593', '0.0', '0.0', 'base_link', 'laser'],
-        parameters=[
-    		rosbot_description + '/config/static_tf.yaml'
-        ]
-    )
-
     rosserial = launch_ros.actions.Node(
         package='rosbot_description',
         executable='rosserial_node.py',
@@ -83,45 +53,9 @@ def generate_launch_description():
         DeclareLaunchArgument('verbose', default_value='true',
                               description='Set "true" to increase messages written to terminal.'),
         rp_lidar,
-        laser_frame_tf,
+
         rosserial,
         rosbot_tf,
-        # launch_ros.actions.Node(
-        #     package='tf2_ros',
-        #     executable='static_transform_publisher',
-        #     output='screen',
-        #     arguments=['0.08', '0.1', '0', '0', '0', '0', 'base_link', 'front_left_wheel'],
-        #     ),        
-        # launch_ros.actions.Node(
-        #     package='tf2_ros',
-        #     executable='static_transform_publisher',
-        #     output='screen',
-        #     arguments=['0.08', '-0.1', '0', '0', '0', '0', 'base_link', 'front_right_wheel'],
-        #     ),
-        # launch_ros.actions.Node(
-        #     package='tf2_ros',
-        #     executable='static_transform_publisher',
-        #     output='screen',
-        #     arguments=['-0.08', '0.1', '0', '0', '0', '0', 'base_link', 'rear_left_wheel'],
-        #     ),        
-        # launch_ros.actions.Node(
-        #     package='tf2_ros',
-        #     executable='static_transform_publisher',
-        #     output='screen',
-        #     arguments=['-0.08', '-0.1', '0', '0', '0', '0', 'base_link', 'rear_right_wheel'],
-        #     ),
-        # launch_ros.actions.Node(
-        #     package='tf2_ros',
-        #     executable='static_transform_publisher',
-        #     output='screen',
-        #     arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'top'],
-        # ),
-        # launch_ros.actions.Node(
-        #     package='tf2_ros',
-        #     executable='static_transform_publisher',
-        #     output='screen',
-        #     arguments=['0', '0', '0.18', '0', '0', '0', 'base_link', 'camera_link'],
-        # ),
 
     ])
 
