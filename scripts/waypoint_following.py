@@ -1,5 +1,7 @@
-#! /usr/bin/env python3
-# Copyright 2023 MA Song, developed based on: 
+# Copyright 2023
+# Author: MA Song
+#
+# developed based on modifying the work at:
 # https://github.com/ros-planning/navigation2/issues/2283
 #
 import sys
@@ -8,10 +10,11 @@ import rclpy
 from rclpy.duration import Duration
 
 from action_msgs.msg import GoalStatus
-from geometry_msgs.msg import Pose
+# from geometry_msgs.msg import Pose
 from geometry_msgs.msg import PoseStamped
 
 from frl_rosbot_onboard.basic_navigator import BasicNavigator
+
 
 def single_pose_nav(x, y, o_z, o_w, argv=sys.argv[1:]):
     rclpy.init()
@@ -49,14 +52,14 @@ def single_pose_nav(x, y, o_z, o_w, argv=sys.argv[1:]):
         # Do something with the feedback
         i = i + 1
         feedback = navigator.getFeedback()
-        # if feedback and i % 5 == 0:
-            # print('Estimated time of arrival: ' + '{0:.0f}'.format(
-            #       Duration.from_msg(feedback.estimated_time_remaining).nanoseconds / 1e9)
-            #       + ' seconds.')
+        if feedback and i % 5 == 0:
+            print('Estimated time of arrival: ' + '{0:.0f}'.format(
+                Duration.from_msg(feedback.estimated_time_remaining).nanoseconds / 1e9)
+                  + ' seconds.')
 
-            # # Some navigation timeout to demo cancellation
-            # if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
-            #     navigator.cancelNav()
+            # Some navigation timeout to demo cancellation
+            if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
+                navigator.cancelNav()
 
     # Do something depending on the return code
     result = navigator.getResult()
@@ -71,6 +74,7 @@ def single_pose_nav(x, y, o_z, o_w, argv=sys.argv[1:]):
 
     rclpy.shutdown()
     # exit(0)
+
 
 def main():
     poses_x = [
@@ -92,7 +96,7 @@ def main():
         1.80,
         0.0
     ]
-    
+
     poses_y = [
         0.55,
         0.92,
@@ -150,11 +154,11 @@ def main():
         0.707,
         1.0
     ]
-    
+
     seq = [16, 0, 1, 2, 14, 15, 16]
 
     for i in seq:
-       single_pose_nav(poses_x[i], poses_y[i], o_z[i], o_w[i])
+        single_pose_nav(poses_x[i], poses_y[i], o_z[i], o_w[i])
 
     exit(0)
 
