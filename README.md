@@ -19,3 +19,7 @@ We provided the `launch/frl_rosbot_bringup_launch.py` to bringup everything you 
 
 ### Basic navigation functions
 We also provided an example for robot localisation and waypoint following in an mapped environment based on nav2.
+
+## Known limitations
+* The depth camera pointcloud registration is currently not available on ROS 2 for Husarian ROSbot Pro.
+* The multi-robot support has yet been finished.
