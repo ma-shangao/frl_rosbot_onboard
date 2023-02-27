@@ -6,9 +6,9 @@ It is a CMake ROS 2 package, tested on foxy.
 
 ## Dependencies
 This package relies on below packages:
-    - packages integrated in the system file at https://robot-os-images.s3.eu-central-1.amazonaws.com/ros-foxy-upboard-2022-08-23.iso
-    - `ros-$ROS_DISTRO-xarco`
-    - nav2, `ros-$ROS_DISTRO-navigation2`, `ros-$ROS_DISTRO-nav2-bringup`
+* packages integrated in the system file at https://robot-os-images.s3.eu-central-1.amazonaws.com/ros-foxy-upboard-2022-08-23.iso
+* `ros-$ROS_DISTRO-xarco`
+* nav2, `ros-$ROS_DISTRO-navigation2`, `ros-$ROS_DISTRO-nav2-bringup`
 
 ## Features
 ### Robot state publisher
