@@ -1,8 +1,10 @@
 #! /usr/bin/env python3
 #
-# Song: Obtained from https://github.com/ros-planning/navigation2/issues/2283#issuecomment-853456150
-# early version of simple command API, trying for foxy, as the API is only available after galactic.
-# 
+# Song: Obtained from:
+# https://github.com/ros-planning/navigation2/issues/2283#issuecomment-853456150
+# early version of simple command API,
+# trying for foxy, as the API is only available after galactic.
+#
 # Copyright 2021 Samsung Research America
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +26,8 @@ from geometry_msgs.msg import Pose
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from lifecycle_msgs.srv import GetState
 # from nav2_msgs.action import NavigateThroughPoses
-from nav2_msgs.action import NavigateToPose, FollowWaypoints
+# from nav2_msgs.action import FollowWaypoints
+from nav2_msgs.action import NavigateToPose
 
 import rclpy
 
@@ -99,7 +102,7 @@ class BasicNavigator(Node):
         goal_msg.pose = pose
 
         self.info('Navigating to goal: ' + str(pose.pose.position.x) + ' ' +
-                      str(pose.pose.position.y) + '...')
+                  str(pose.pose.position.y) + '...')
         send_goal_future = self.nav_to_pose_client.send_goal_async(goal_msg,
                                                                    self._feedbackCallback)
         rclpy.spin_until_future_complete(self, send_goal_future)
@@ -107,7 +110,7 @@ class BasicNavigator(Node):
 
         if not self.goal_handle.accepted:
             self.error('Goal to ' + str(pose.pose.position.x) + ' ' +
-                           str(pose.pose.position.y) + ' was rejected!')
+                       str(pose.pose.position.y) + ' was rejected!')
             return False
 
         self.result_future = self.goal_handle.get_result_async()

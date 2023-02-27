@@ -1,11 +1,15 @@
+# Copyright 2023
+# Author: MA Song
+
 import os
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+# from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch_ros.actions import Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
+
 
 def generate_launch_description():
     pkg_dir = get_package_share_directory('frl_rosbot_onboard')
@@ -29,6 +33,6 @@ def generate_launch_description():
             launch_arguments={
                 'params_file': params_file,
                 'map': map_yaml_file
-            }.items()  
+            }.items()
         )
     ])
