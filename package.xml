@@ -17,6 +17,17 @@
   <test_depend>ament_lint_common</test_depend>
 
   <exec_depend>ros2launch</exec_depend>
+  <exec_depend>navigation2</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+
+  <!-- These dependencies are provided by the file system of Husarion OS in ws/src -->
+  <!-- [ERROR with camera pkg]cannot successfully build astra_camera and route_admin_panel by Husarion -->
+  <!-- <exec_depend>astra_camera</exec_depend> -->
+  <!-- <exec_depend>route_admin_panel</exec_depend> -->
+  <exec_depend>rosbot_description</exec_depend>
+  <exec_depend>rplidar_ros</exec_depend>
+  
 
   <export>
     <build_type>ament_cmake</build_type>
