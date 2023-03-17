@@ -21,6 +21,8 @@ WORKDIR /work/ros2_ws/src
 COPY ./ frl_rosbot_onboard/
 
 RUN git clone https://github.com/husarion/rosbot_description.git
+# Cannot successfully build ros_astra_camera at this time
+# RUN git clone https://github.com/husarion/ros_astra_camera.git
 
 WORKDIR /work/ros2_ws/src/frl_rosbot_onboard
 RUN ls
@@ -28,8 +30,13 @@ RUN ls
 WORKDIR /work/ros2_ws/src/rosbot_description
 RUN git checkout foxy
 
+# WORKDIR /work/ros2_ws/src/ros_astra_camera
+# RUN git checkout foxy
+
 WORKDIR /work/ros2_ws
 
-RUN rosdep install -y --from-paths . --ignore-src
+RUN rosdep install -y -r --from-paths . --ignore-src
 
-RUN /bin/bash -c "source /opt/ros/foxy/setup.bash && colcon build && colcon test --packages-select frl_rosbot_onboard"
+RUN /bin/bash -c "source /opt/ros/foxy/setup.bash && colcon build"
+RUN /bin/bash -c "source /opt/ros/foxy/setup.bash && colcon test --packages-select frl_rosbot_onboard"
+RUN /bin/bash -c "source /opt/ros/foxy/setup.bash && colcon test-result --verbose"
