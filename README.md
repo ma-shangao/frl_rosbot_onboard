@@ -5,10 +5,15 @@ This package is developed to be implemented on the physical robot Husarian ROSbo
 It is a CMake ROS 2 package, tested on foxy.
 
 ## Dependencies
-This package relies on below packages:
-* packages integrated in the system files at https://robot-os-images.s3.eu-central-1.amazonaws.com/ros-foxy-upboard-2022-08-23.iso
-* `ros-$ROS_DISTRO-xarco`
-* nav2, `ros-$ROS_DISTRO-navigation2`, `ros-$ROS_DISTRO-nav2-bringup`
+This package relies on the packages integrated in the system files at https://robot-os-images.s3.eu-central-1.amazonaws.com/ros-foxy-upboard-2022-08-23.iso
+
+Other dependecies are specified in `package.xml`. You can install them by running
+ ```bash
+ cd $YOUR_WORKSPACE
+ rosdep update
+ rosdep install --from-paths . --ignore-src -y -r
+ ```
+If this is your first time to run this command, you may need to run `sudo rosdep init` first.
 
 ## Features
 ### Robot state publisher
