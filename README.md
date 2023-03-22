@@ -31,10 +31,10 @@ If this is your first time to run this command, you may need to run `sudo rosdep
 
 ## Features
 ### Robot state publisher
-This package rewrapped the robot description for Husarian ROSbot Pro in `launch/robot_state_publisher_launch.py`.
+This package rewrapped the robot description for Husarian ROSbot 2 Pro in `launch/robot_state_publisher_launch.py`.
 
 ### Bringing up the whole robot
-We provided the `launch/frl_rosbot_bringup_launch.py` to bringup everything you need from the robot, such as sensors, actuators and robot desciption.
+We provided the `launch/frl_rosbot_bringup_launch.py` to bringup everything you need from the robot, such as sensors, actuators and robot description.
 
 Simply launch the robot by:
 ```bash
