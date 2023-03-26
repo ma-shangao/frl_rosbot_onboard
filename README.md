@@ -50,3 +50,6 @@ For instructions of the simulated ROSbot 2 Pro, please refer to: https://github.
 ## Known limitations
 * The depth camera pointcloud registration is currently not available on ROS 2 for Husarian ROSbot Pro.
 * The multi-robot support has yet been finished. (WIP)
+
+## Licence
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licenced under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
