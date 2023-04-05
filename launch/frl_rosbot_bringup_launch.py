@@ -15,7 +15,8 @@ from launch.actions import DeclareLaunchArgument
 
 
 def generate_launch_description():
-    # use_sim_time = launch.substitutions.LaunchConfiguration('use_sim_time', default='false')
+    # use_sim_time = launch.substitutions.LaunchConfiguration(
+    #     'use_sim_time', default='false')
     rosbot_description = get_package_share_directory('rosbot_description')
     rplidar_ros = get_package_share_directory('rplidar_ros')
     frl_rosbot_onboard = get_package_share_directory('frl_rosbot_onboard')
@@ -56,7 +57,8 @@ def generate_launch_description():
             default_value='false'
         ),
         DeclareLaunchArgument('verbose', default_value='true',
-                              description='Set "true" to increase messages written to terminal.'),
+                              description='Set "true" to\
+                              increase messages written to terminal.'),
         astra_camera,
         rosbot_state,
         rp_lidar,

@@ -15,7 +15,8 @@ def generate_launch_description():
     file_subpath = 'config/urdf/rosbot.xacro'
 
     # Use xacro to process the file
-    xacro_file = os.path.join(get_package_share_directory(pkg_name), file_subpath)
+    xacro_file = os.path.join(get_package_share_directory(pkg_name),
+                              file_subpath)
     robot_description_raw = xacro.process_file(xacro_file).toxml()
 
     # Configure the node
