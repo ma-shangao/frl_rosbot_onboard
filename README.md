@@ -1,5 +1,7 @@
 # frl_rosbot_onboard
 
+[![Build](https://github.com/ma-shangao/frl_rosbot_onboard/actions/workflows/docker_ci.yml/badge.svg)](https://github.com/ma-shangao/frl_rosbot_onboard/actions/workflows/docker_ci.yml)
+
 This package is developed to be implemented on the physical robot Husarian ROSbot Pro.
 
 It is a CMake ROS 2 package, tested on foxy.
