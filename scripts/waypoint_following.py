@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 # Copyright 2023
 # Author: MA Song
 #
@@ -7,7 +8,6 @@
 import sys
 
 import rclpy
-from rclpy.duration import Duration
 
 from action_msgs.msg import GoalStatus
 # from geometry_msgs.msg import Pose
@@ -51,15 +51,15 @@ def single_pose_nav(x, y, o_z, o_w, argv=sys.argv[1:]):
 
         # Do something with the feedback
         i = i + 1
-        feedback = navigator.getFeedback()
-        if feedback and i % 5 == 0:
-            print('Estimated time of arrival: ' + '{0:.0f}'.format(
-                Duration.from_msg(feedback.estimated_time_remaining).nanoseconds / 1e9)
-                  + ' seconds.')
+        # feedback = navigator.getFeedback()
+        # if feedback and i % 5 == 0:
+        #     print('Estimated time of arrival: ' + '{0:.0f}'.format(
+        #         Duration.from_msg(feedback.estimated_time_remaining).nanoseconds / 1e9)
+        #           + ' seconds.')
 
-            # Some navigation timeout to demo cancellation
-            if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
-                navigator.cancelNav()
+        #     # Some navigation timeout to demo cancellation
+        #     if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
+        #         navigator.cancelNav()
 
     # Do something depending on the return code
     result = navigator.getResult()
