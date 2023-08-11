@@ -8,7 +8,6 @@
 import sys
 
 import rclpy
-from rclpy.duration import Duration
 
 from action_msgs.msg import GoalStatus
 # from geometry_msgs.msg import Pose
